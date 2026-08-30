@@ -1,0 +1,39 @@
+# Central configuration for the ADHD ML/screening pipeline.
+# Column names below are CONFIRMED against the real uploaded HYPERAKTIV files
+# (semicolon-delimited; patient_info.csv, CPT_II_ConnersContinuousPerformanceTest.csv,
+# features.csv).
+
+paths:
+  patient_info: data/raw/patient_info.csv
+  cpt_raw: data/raw/CPT_II_ConnersContinuousPerformanceTest.csv
+  actigraphy_features: data/raw/features.csv   # already-computed tsfresh features, 787 cols
+  feature_dataset: data/processed/feature_dataset.csv
+  model_comparison_report: reports/model_comparison.csv
+  best_model: models/best_model.joblib
+
+columns:
+  id_col: ID                # confirmed
+  label_col: ADHD            # confirmed, 0/1
+  adhd_value: 1
+
+  # Real clinical questionnaire columns in patient_info.csv - no synthesis
+  # needed, these are measured. ASRS here is the full 18-item checklist total
+  # (range 6-68 in this sample), not the 6-item Part A screener used elsewhere
+  # in this project (e.g. the Flutter app's live questionnaire) - different
+  # instrument/scale, note this explicitly in your report.
+  questionnaire_cols: [ASRS, WURS, MADRS, HADS_A, HADS_D]
+
+  # patient_info.CPT_II is a completion flag (99/103 patients completed the
+  # CPT-II) - used to know which patients have real CPT_raw data available.
+  cpt_completion_flag_col: CPT_II
+
+  # CPT_II_ConnersContinuousPerformanceTest.csv has 720 raw per-trial columns
+  # (Trial1/Response1 .. Trial360/Response360) plus real summary/clinical
+  # scores. Only the summary columns are used as features - the raw trial
+  # columns are excluded (see src/data_loading.py::CPT_SUMMARY_COLUMNS).
+
+training:
+  cv_folds: 5
+  test_ratio: 0.2
+  random_seed: 42
+  models: ["logistic_regression", "random_forest", "xgboost"]
