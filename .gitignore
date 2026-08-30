@@ -4,3 +4,7 @@ __pycache__/
 venv/
 *.joblib
 .pytest_cache/
+
+# Real HYPERAKTIV patient data (CPT-II scores, questionnaire scores,
+# actigraphy features) - never commit this, see data/raw/README.md.
+adhd_ml_pipeline/data/raw/*.csv
