@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ADHD Insight{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a class="brand" href="{{ url_for('main.index') }}">ADHD Insight</a>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>Research prototype. Not a diagnostic tool. Not a substitute for
+      professional clinical assessment.</p>
+  </footer>
+</body>
+</html>
