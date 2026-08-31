@@ -20,8 +20,10 @@ def create_app(config_name=None):
     app.config.from_object(config[config_name])
 
     from routes.main import main_bp
+    from routes.questionnaire import questionnaire_bp
 
     app.register_blueprint(main_bp)
+    app.register_blueprint(questionnaire_bp)
 
     return app
 

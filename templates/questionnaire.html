@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}ADHD Insight — Questionnaire{% endblock %}
+
+{% block content %}
+  <section class="page">
+    <div class="progress-label">
+      <span id="question-meta">Question 1 of 6</span>
+      <span id="progress-percent">17%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 17%;"></div>
+    </div>
+
+    <div class="card question-card" id="question-card" style="margin-top: 1.5rem;">
+      <h2 id="question-text"></h2>
+
+      <div class="radio-group" id="options-list" role="radiogroup"></div>
+
+      <div class="question-nav">
+        <button type="button" class="btn btn-secondary" id="btn-previous">← Previous</button>
+        <button type="button" class="btn btn-primary" id="btn-next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="card" id="completion-panel" hidden style="margin-top: 1.5rem;">
+      <h2>Thanks for answering.</h2>
+      <p class="text-muted">
+        Your responses are held in this page only right now — questionnaire
+        storage and scoring aren't built yet.
+      </p>
+    </div>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/questionnaire.js') }}"></script>
+{% endblock %}

@@ -4,24 +4,92 @@
 
 {% block content %}
   <section class="hero">
-    <h1>ADHD Insight</h1>
-    <p class="lead">
-      A research prototype that combines a short questionnaire with browser
-      based attention tasks to produce a preliminary screening indication
-      of ADHD-related behavioural patterns.
-    </p>
+    <div class="hero-copy">
+      <h1>Understand Your Behavioural Patterns</h1>
+      <p class="lead">
+        A research-oriented platform that combines questionnaire responses
+        and cognitive tasks to generate a preliminary screening indication
+        of ADHD-related behavioural patterns.
+      </p>
 
-    <p class="disclaimer">
-      <strong>This is not a diagnosis.</strong> Results describe a
-      behavioural profile only and are not a substitute for assessment by a
-      qualified clinician. If you have concerns about ADHD, please speak
-      with a healthcare professional.
-    </p>
+      <p><a class="btn btn-primary" href="{{ url_for('main.consent') }}">Begin Assessment</a></p>
 
-    <p><a class="cta" href="{{ url_for('main.consent') }}">Get started</a></p>
+      <div class="tag-row">
+        <span><i class="bi bi-flask" aria-hidden="true"></i> Scientific Approach</span>
+        <span><i class="bi bi-journal-text" aria-hidden="true"></i> Research Based</span>
+        <span><i class="bi bi-shield-lock" aria-hidden="true"></i> Privacy Focused</span>
+      </div>
+    </div>
 
-    <p class="status-note">
-      The questionnaire and cognitive tasks are still under construction.
-    </p>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" fill="#EEF2FF"/>
+        <path d="M8 14c0-3 1.8-5.5 4-5.5s4 2.5 4 5.5-1.8 4.5-4 4.5-4-1.5-4-4.5Z"
+              stroke="#6366F1" stroke-width="1.4"/>
+        <path d="M9 9.5c-1.2-1-1.4-2.7-.4-3.8" stroke="#6366F1" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M15 9.5c1.2-1 1.4-2.7.4-3.8" stroke="#6366F1" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
   </section>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon-row">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h3>Questionnaire</h3>
+          <p class="text-small text-muted" style="margin: 0;">
+            Self-reported behaviour assessment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon-row">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h3>Cognitive Tasks</h3>
+          <p class="text-small text-muted" style="margin: 0;">
+            Attention and response inhibition tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon-row">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <path d="M5 19V9M12 19V5M19 19v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <div>
+          <h3>Behavioural Analysis</h3>
+          <p class="text-small text-muted" style="margin: 0;">
+            Data-driven insights and screening.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="alert alert-info" style="margin-top: 2rem;">
+    This platform is for research purposes only and does not provide a
+    medical diagnosis.
+  </p>
+
+  <p class="status-note" style="margin-top: 1rem;">
+    The cognitive tasks are still under construction.
+  </p>
 {% endblock %}

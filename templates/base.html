@@ -4,13 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}ADHD Insight{% endblock %}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons: used for small inline icons (feature badges, etc.) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <header class="site-header">
-    <nav class="site-nav">
-      <a class="brand" href="{{ url_for('main.index') }}">ADHD Insight</a>
-    </nav>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="{{ url_for('main.index') }}">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <circle cx="12" cy="12" r="10" fill="url(#brand-gradient)"/>
+            <path d="M8 13c0-2.5 1.8-4.5 4-4.5s4 2 4 4.5-1.8 4-4 4-4-1.5-4-4Z"
+                  stroke="#fff" stroke-width="1.3" fill="none"/>
+            <defs>
+              <linearGradient id="brand-gradient" x1="0" y1="0" x2="24" y2="24">
+                <stop offset="0" stop-color="#4F46E5"/>
+                <stop offset="1" stop-color="#6366F1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        ADHD Insight
+      </a>
+
+      <nav class="nav-links">
+        <a href="{{ url_for('main.index') }}">Home</a>
+      </nav>
+
+      <a class="btn btn-primary btn-nav" href="{{ url_for('main.consent') }}">Start Assessment</a>
+    </div>
   </header>
 
   <main class="site-main">
