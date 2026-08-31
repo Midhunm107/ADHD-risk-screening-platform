@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}ADHD Insight — Consent{% endblock %}
+
+{% block content %}
+  <section class="consent">
+    <h1>Before You Begin</h1>
+
+    <h2>Purpose</h2>
+    <p class="lead">
+      This assessment is part of an academic research project exploring
+      whether a short questionnaire and browser based attention tasks can
+      produce a useful preliminary screening indication of ADHD-related
+      behavioural patterns.
+    </p>
+
+    <h2>What happens next</h2>
+    <ol class="consent-flow">
+      <li>Questionnaire</li>
+      <li>Attention Task</li>
+      <li>Go/No-Go Task</li>
+      <li>Behavioural Analysis</li>
+    </ol>
+
+    <p class="disclaimer">
+      This platform is developed for academic research and preliminary
+      screening research. It does not provide a medical diagnosis and
+      should not replace assessment by a qualified healthcare professional.
+    </p>
+
+    <form class="consent-form" id="consent-form">
+      <label class="consent-check">
+        <input type="checkbox" id="consent-checkbox">
+        I understand the above information.
+      </label>
+
+      <button type="submit" id="consent-continue" disabled>Continue</button>
+    </form>
+
+    <p class="status-note" id="consent-next-note" hidden>
+      The questionnaire page is still under construction.
+    </p>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/consent.js') }}"></script>
+{% endblock %}
