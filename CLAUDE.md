@@ -14,18 +14,23 @@ cross-cutting or new-module work; this file only summarizes them.
 
 ## Project status
 
-Per the master spec's phase plan (§30), **Phases 0-4 are done, Phase 5 has
-not started**: repo setup, HYPERAKTIV exploration, the (now-superseded)
+Per the master spec's phase plan (§30), **Phases 0-4 are done, Phase 5 is
+in progress**: repo setup, HYPERAKTIV exploration, the (now-superseded)
 synthetic dataset, and the batch feature-engineering pipeline are all in
 place, and the ML baseline is a verified result — **80.5% accuracy**
 (XGBoost, CPT-II + real questionnaire features, 5-fold stratified CV; see
 `adhd_ml_pipeline/README.md` for the full ablation table).
 
-Phase 5 (web foundation: Flask app, homepage, consent, questionnaire,
-attention task) and Phases 6-8 (integration, testing, docs for the website)
-have **not started** — no `backend/`, `frontend/`, `app.py`, or database
-code exists yet. Do not assume any Flask routes, HTML templates, SQLite
-schema, or JS task code exist. The only working code is `adhd_ml_pipeline/`.
+Phase 5 (web foundation) so far has a working Flask app (`app.py`,
+`config.py`, `routes/`, `templates/`, `static/`) with a shared
+`templates/base.html` layout/design system, a homepage, a consent/
+disclaimer page, and an 18-item ASRS-v1.1 questionnaire wizard
+(`routes/questionnaire.py`) that stores answers in the Flask session as
+the user progresses — no database yet. The Sustained Attention task,
+Go/No-Go task, raw-response storage, and task-metric calculation (the rest
+of Phase 5) and Phases 6-8 (integration, testing, docs for the website)
+have **not started**. Do not assume any SQLite schema, SQLAlchemy models,
+or cognitive-task JS exist yet.
 
 ## Non-negotiable rules (master spec §33, §4, website spec §20-21)
 
@@ -63,7 +68,7 @@ schema, or JS task code exist. The only working code is `adhd_ml_pipeline/`.
 ## Architecture: two separate data paths
 
 ```
-PATH A (research, implemented)          PATH B (application, not started)
+PATH A (research, implemented)          PATH B (application, in progress)
 HYPERAKTIV → preprocessing →            Browser tasks → raw events →
 feature extraction → ML models →        feature extraction → screening-
 evaluation                              oriented result (Flask + SQLite)
@@ -104,9 +109,13 @@ Key details:
   to underperform — more tsfresh features than patients). Best model saves
   to `models/best_model.joblib` as `{"model", "scaler", "feature_cols"}` —
   load all three together.
-- This dataset's `ASRS` column is the full 18-item checklist, not the
-  6-item Part A screener the future website questionnaire would use —
-  different instrument/scale, don't conflate them. `AGE` is categorical
+- This dataset's `ASRS` column is the full 18-item WHO ASRS-v1.1 Symptom
+  Checklist (Parts A & B). The website questionnaire
+  (`routes/questionnaire.py`) now uses the same 18-item instrument, so the
+  item counts and wording match — but matching item counts doesn't by
+  itself make the two feature sets interchangeable; the "HYPERAKTIV
+  features ≠ browser-task features" rule below still applies before
+  wiring any model to website-generated answers. `AGE` is categorical
   (1-4), not raw years.
 
 ## When Phase 5 (web) work starts

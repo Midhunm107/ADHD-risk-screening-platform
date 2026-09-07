@@ -5,34 +5,47 @@
 {% block content %}
   <section class="page">
     <div class="progress-label">
-      <span id="question-meta">Question 1 of 6</span>
-      <span id="progress-percent">17%</span>
+      <span>Question {{ n }} of {{ total }}</span>
+      <span>{{ percent }}%</span>
     </div>
     <div class="progress-track">
-      <div class="progress-fill" id="progress-fill" style="width: 17%;"></div>
+      <div class="progress-fill" style="width: {{ percent }}%;"></div>
     </div>
 
-    <div class="card question-card" id="question-card" style="margin-top: 1.5rem;">
-      <h2 id="question-text"></h2>
+    <form class="card question-card" method="post"
+          action="{{ url_for('questionnaire.question', n=n) }}" style="margin-top: 1.5rem;">
+      <h2>{{ question_text }}</h2>
 
-      <div class="radio-group" id="options-list" role="radiogroup"></div>
+      {% if error %}
+        <p class="alert alert-warning">{{ error }}</p>
+      {% endif %}
+
+      <div class="radio-group" role="radiogroup">
+        {% for option in options %}
+          <label class="radio-option" for="option-{{ loop.index0 }}">
+            <input type="radio" name="answer" id="option-{{ loop.index0 }}"
+                   value="{{ option }}" required
+                   {% if option == selected %}checked{% endif %}>
+            {{ option }}
+          </label>
+        {% endfor %}
+      </div>
 
       <div class="question-nav">
-        <button type="button" class="btn btn-secondary" id="btn-previous">← Previous</button>
-        <button type="button" class="btn btn-primary" id="btn-next" disabled>Next →</button>
+        <button type="submit" name="action" value="previous"
+                class="btn btn-secondary" formnovalidate {% if n == 1 %}disabled{% endif %}>
+          ← Previous
+        </button>
+        <button type="submit" name="action" value="next" class="btn btn-primary">
+          {{ "Finish" if n == total else "Next →" }}
+        </button>
       </div>
-    </div>
+    </form>
 
-    <div class="card" id="completion-panel" hidden style="margin-top: 1.5rem;">
-      <h2>Thanks for answering.</h2>
-      <p class="text-muted">
-        Your responses are held in this page only right now — questionnaire
-        storage and scoring aren't built yet.
-      </p>
-    </div>
+    <p class="text-small text-muted" style="margin-top: 1rem;">
+      Source: WHO Adult ADHD Self-Report Scale (ASRS-v1.1) Symptom
+      Checklist, Parts A &amp; B. This is a self-report screening
+      instrument, not a diagnosis.
+    </p>
   </section>
-{% endblock %}
-
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/questionnaire.js') }}"></script>
 {% endblock %}

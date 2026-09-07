@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}ADHD Insight — Questionnaire Complete{% endblock %}
+
+{% block content %}
+  <section class="page">
+    <div class="card">
+      <h2>Thanks for answering.</h2>
+      <p class="text-muted">
+        You answered {{ answered }} of {{ total }} questions. Your
+        responses are held in this browser session only right now —
+        database storage and scoring aren't built yet.
+      </p>
+    </div>
+  </section>
+{% endblock %}
